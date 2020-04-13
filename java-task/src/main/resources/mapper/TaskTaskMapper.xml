@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--
+******************************************************************************
+* 数据库表：TASK_TASK
+* 表的名称：
+* 对应实体：com.hdf.task.entity.TaskTask
+* 开发日期：2019-03-07
+* 技术服务：www.fwjava.com
+******************************************************************************
+-->
+<mapper namespace="com.hdf.task.mapper.ITaskTaskMapper">
+
+    <!--
+    **************************************************************************
+    * 1.新增一条数据
+    * 注: 根据Bean实体执行新增操作.
+    **************************************************************************
+    -->
+    <insert id="getInsert"
+            parameterType="com.hdf.task.entity.TaskTask">
+
+        INSERT /* getInsert+@com.hdf.task.mapper.TaskTaskDao.xml */
+        INTO TASK_TASK /* */
+        (
+        CODE /* 将主键当做线程ID */
+        ,TASK_DESC /* 任务name */
+        ,CRON /* cron表达式 */
+        ,STATUS /* 运行状态Y正在运行N未运行 */
+        ,DELETE_FLAG /* 是否删除Y已删除N未删除 */
+        ,API_URL /* 接口地址 */
+        ,REMARK /* 任务描述 */
+        )
+        VALUES (
+        #{code} /* 将主键当做线程ID */
+        ,#{taskDesc} /* 任务name */
+        ,#{cron} /* cron表达式 */
+        ,#{status} /* 运行状态Y正在运行N未运行 */
+        ,#{deleteFlag} /* 是否删除Y已删除N未删除 */
+        ,#{apiUrl} /* 接口地址 */
+        ,#{remark} /* 任务描述 */
+        )
+
+    </insert>
+
+
+    <!--
+    **************************************************************************
+    * 2.删除一条数据
+    * 注: 根据Bean实体的主键ID执行删除操作.
+    **************************************************************************
+    -->
+    <delete id="getDelete"
+            parameterType="java.lang.String">
+
+        DELETE /* getDelete+@com.hdf.task.mapper.TaskTaskDao.xml */
+        FROM TASK_TASK /* */
+        WHERE CODE = #{_parameter} /* 将主键当做线程ID */
+
+    </delete>
+
+
+    <!--
+    **************************************************************************
+    * 3.变更一条数据
+    * 注: 根据Bean实体的主键ID执行变更操作.
+    **************************************************************************
+    -->
+    <update id="getUpdate"
+            parameterType="com.hdf.task.entity.TaskTask">
+
+        UPDATE /* getUpdate+@com.hdf.task.mapper.TaskTaskDao.xml */
+        TASK_TASK /* */
+        SET TASK_DESC = #{taskDesc} /* 任务name */
+        ,CRON = #{cron} /* cron表达式 */
+        ,STATUS = #{status} /* 运行状态Y正在运行N未运行 */
+        ,DELETE_FLAG = #{deleteFlag} /* 是否删除Y已删除N未删除 */
+        ,API_URL = #{apiUrl} /* 接口地址 */
+        ,REMARK = #{remark} /* 任务描述 */
+        WHERE CODE = #{code} /* 将主键当做线程ID */
+
+    </update>
+
+
+    <!--
+    **************************************************************************
+    * 4.获取一个Bean实体
+    * 注: 根据Bean实体的主键ID获取一个Bean实体.
+    **************************************************************************
+    -->
+    <select id="getBean"
+            parameterType="java.lang.String"
+            resultType="com.hdf.task.entity.TaskTask">
+
+        SELECT /* getBean+@com.hdf.task.mapper.TaskTaskDao.xml */
+        tt.CODE AS "code" /* 将主键当做线程ID */
+        ,tt.TASK_DESC AS "taskDesc" /* 任务name */
+        ,tt.CRON AS "cron" /* cron表达式 */
+        ,tt.STATUS AS "status" /* 运行状态Y正在运行N未运行 */
+        ,tt.DELETE_FLAG AS "deleteFlag" /* 是否删除Y已删除N未删除 */
+        ,tt.API_URL AS "apiUrl" /* 接口地址 */
+        ,tt.REMARK AS "remark" /* 任务描述 */
+        FROM TASK_TASK tt /* */
+        WHERE tt.CODE = #{_parameter} /* 将主键当做线程ID */
+
+    </select>
+
+
+    <!--
+    **************************************************************************
+    * 5.条件查询
+    * 注: 支持多条件查询、模糊查询、日期比较查询等操作.
+    **************************************************************************
+    -->
+    <select id="getList"
+            parameterType="com.hdf.task.entity.TaskTask"
+            resultType="com.hdf.task.entity.TaskTask">
+
+        SELECT /* getList+@com.hdf.task.mapper.TaskTaskDao.xml */
+        tt.CODE AS "code" /* 将主键当做线程ID */
+        ,tt.TASK_DESC AS "taskDesc" /* 任务name */
+        ,tt.CRON AS "cron" /* cron表达式 */
+        ,tt.STATUS AS "status" /* 运行状态Y正在运行N未运行 */
+        ,tt.DELETE_FLAG AS "deleteFlag" /* 是否删除Y已删除N未删除 */
+        ,tt.API_URL AS "apiUrl" /* 接口地址 */
+        ,tt.REMARK AS "remark" /* 任务描述 */
+        FROM TASK_TASK tt /* */
+        WHERE 1 = 1
+
+        <if test='code != null and code != "" and code != "null" and code != "undefined"'>
+            AND tt.CODE = #{code} /* 将主键当做线程ID */
+        </if>
+
+        <if test='taskDesc != null and taskDesc != "" and taskDesc != "null" and taskDesc != "undefined"'>
+            AND tt.TASK_DESC = #{taskDesc} /* 任务name */
+        </if>
+
+        <if test='cron != null and cron != "" and cron != "null" and cron != "undefined"'>
+            AND tt.CRON = #{cron} /* cron表达式 */
+        </if>
+
+        <if test='status != null and status != "" and status != "null" and status != "undefined"'>
+            AND tt.STATUS = #{status} /* 运行状态Y正在运行N未运行 */
+        </if>
+
+        <if test='deleteFlag != null and deleteFlag != "" and deleteFlag != "null" and deleteFlag != "undefined"'>
+            AND tt.DELETE_FLAG = #{deleteFlag} /* 是否删除Y已删除N未删除 */
+        </if>
+
+        <if test='apiUrl != null and apiUrl != "" and apiUrl != "null" and apiUrl != "undefined"'>
+            AND tt.API_URL = #{apiUrl} /* 接口地址 */
+        </if>
+
+        <if test='remark != null and remark != "" and remark != "null" and remark != "undefined"'>
+            AND tt.REMARK = #{remark} /* 任务描述 */
+        </if>
+
+
+        <!-- 常用自定义字段 -->
+        <!-- /常用自定义字段 -->
+
+        <if test='orderBy != null and orderBy != ""'>
+            ORDER BY ${orderBy} /* 排序 */
+        </if>
+
+    </select>
+
+
+    <!--
+    **************************************************************************
+    * 6.分页查询
+    * 注: 支持分页查询、多条件查询、模糊查询、日期比较查询等操作.
+    **************************************************************************
+    -->
+    <select id="getPageList"
+            parameterType="java.util.HashMap"
+            resultType="com.hdf.task.entity.TaskTask">
+
+        SELECT /* getPageList+@com.hdf.task.mapper.TaskTaskDao.xml */
+        tt.CODE AS "code" /* 将主键当做线程ID */
+        ,tt.TASK_DESC AS "taskDesc" /* 任务name */
+        ,tt.CRON AS "cron" /* cron表达式 */
+        ,tt.STATUS AS "status" /* 运行状态Y正在运行N未运行 */
+        ,tt.DELETE_FLAG AS "deleteFlag" /* 是否删除Y已删除N未删除 */
+        ,tt.API_URL AS "apiUrl" /* 接口地址 */
+        ,tt.REMARK AS "remark" /* 任务描述 */
+        FROM TASK_TASK tt /* */
+        WHERE 1 = 1
+
+        <if test='bean != null'>
+
+            <if test='bean.code != null and bean.code != "" and bean.code != "null" and bean.code != "undefined"'>
+                AND tt.CODE = #{bean.code} /* 将主键当做线程ID */
+            </if>
+
+            <if test='bean.taskDesc != null and bean.taskDesc != "" and bean.taskDesc != "null" and bean.taskDesc != "undefined"'>
+                AND tt.TASK_DESC = #{bean.taskDesc} /* 任务name */
+            </if>
+
+            <if test='bean.cron != null and bean.cron != "" and bean.cron != "null" and bean.cron != "undefined"'>
+                AND tt.CRON = #{bean.cron} /* cron表达式 */
+            </if>
+
+            <if test='bean.status != null and bean.status != "" and bean.status != "null" and bean.status != "undefined"'>
+                AND tt.STATUS = #{bean.status} /* 运行状态Y正在运行N未运行 */
+            </if>
+
+            <if test='bean.deleteFlag != null and bean.deleteFlag != "" and bean.deleteFlag != "null" and bean.deleteFlag != "undefined"'>
+                AND tt.DELETE_FLAG = #{bean.deleteFlag} /* 是否删除Y已删除N未删除 */
+            </if>
+
+            <if test='bean.apiUrl != null and bean.apiUrl != "" and bean.apiUrl != "null" and bean.apiUrl != "undefined"'>
+                AND tt.API_URL = #{bean.apiUrl} /* 接口地址 */
+            </if>
+
+            <if test='bean.remark != null and bean.remark != "" and bean.remark != "null" and bean.remark != "undefined"'>
+                AND tt.REMARK = #{bean.remark} /* 任务描述 */
+            </if>
+
+
+            <!-- 常用自定义字段 -->
+            <!-- /常用自定义字段 -->
+
+            <if test='bean.orderBy != null and bean.orderBy != ""'>
+                ORDER BY ${bean.orderBy} /* 排序 */
+            </if>
+
+        </if>
+
+        <!-- 分页条 -->
+        LIMIT #{offset} ,#{rows}
+        <!-- /分页条 -->
+
+    </select>
+
+
+    <!--
+    **************************************************************************
+    * 7.删除一条数据
+    * 注: 根据Bean实体的主键ID执行删除操作.
+    **************************************************************************
+    -->
+    <delete id="getDeleteBean"
+            parameterType="com.hdf.task.entity.TaskTask">
+
+        DELETE /* getDeleteBean+@com.hdf.task.mapper.TaskTaskDao.xml */
+        FROM TASK_TASK /* */
+        WHERE CODE = #{code} /* 将主键当做线程ID */
+
+    </delete>
+
+
+    <!--
+    **************************************************************************
+    * 8.删除多条数据
+    * 注: 根据拼接有限个主键ID执行多条数据的删除操作.
+    **************************************************************************
+    -->
+    <delete id="getDeleteIn"
+            parameterType="java.lang.String">
+
+        DELETE /* getDeleteIn+@com.hdf.task.mapper.TaskTaskDao.xml */
+        FROM TASK_TASK /* */
+        WHERE CODE in /* 将主键当做线程ID */
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </delete>
+
+
+    <!--
+    **************************************************************************
+    * 9.条件删除数据
+    * 注: 根据多种条件执行批量删除操作.
+    **************************************************************************
+    -->
+    <delete id="getDeleteBy"
+            parameterType="com.hdf.task.entity.TaskTask">
+
+        DELETE /* getDeleteBy+@com.hdf.task.mapper.TaskTaskDao.xml */
+        FROM TASK_TASK /* */
+        WHERE 1 = 1
+
+        <if test='code != null and code != "" and code != "null" and code != "undefined"'>
+            AND CODE = #{code} /* 将主键当做线程ID */
+        </if>
+
+        <if test='taskDesc != null and taskDesc != "" and taskDesc != "null" and taskDesc != "undefined"'>
+            AND TASK_DESC = #{taskDesc} /* 任务name */
+        </if>
+
+        <if test='cron != null and cron != "" and cron != "null" and cron != "undefined"'>
+            AND CRON = #{cron} /* cron表达式 */
+        </if>
+
+        <if test='status != null and status != "" and status != "null" and status != "undefined"'>
+            AND STATUS = #{status} /* 运行状态Y正在运行N未运行 */
+        </if>
+
+        <if test='deleteFlag != null and deleteFlag != "" and deleteFlag != "null" and deleteFlag != "undefined"'>
+            AND DELETE_FLAG = #{deleteFlag} /* 是否删除Y已删除N未删除 */
+        </if>
+
+        <if test='apiUrl != null and apiUrl != "" and apiUrl != "null" and apiUrl != "undefined"'>
+            AND API_URL = #{apiUrl} /* 接口地址 */
+        </if>
+
+        <if test='remark != null and remark != "" and remark != "null" and remark != "undefined"'>
+            AND REMARK = #{remark} /* 任务描述 */
+        </if>
+
+
+        <!-- 常用自定义字段 -->
+        <!-- /常用自定义字段 -->
+
+
+    </delete>
+
+
+    <!--
+    **************************************************************************
+    * 10.验证一条数据是否存在
+    * 注: 根据主键ID验证该数据是否存在 ,并返回数据量.
+    **************************************************************************
+    -->
+    <select id="getCheck"
+            parameterType="java.lang.String"
+            resultType="java.lang.Integer">
+
+        SELECT /* getCheck+@com.hdf.task.mapper.TaskTaskDao.xml */
+        count(1)
+        FROM TASK_TASK /* */
+        WHERE CODE = #{_parameter} /* 将主键当做线程ID */
+
+    </select>
+
+
+    <!--
+    **************************************************************************
+    * 11.验证多条件数据是否存在
+    * 注: 根据多条件验证该数据是否存在 ,并返回数据量.
+    **************************************************************************
+    -->
+    <select id="getCheckBy"
+            parameterType="com.hdf.task.entity.TaskTask"
+            resultType="java.lang.Integer">
+
+        SELECT /* getCheckBy+@com.hdf.task.mapper.TaskTaskDao.xml */
+        count(1)
+        FROM TASK_TASK /* */
+        WHERE 1 = 1
+
+        <if test='code != null and code != "" and code != "null" and code != "undefined"'>
+            AND CODE = #{code} /* 将主键当做线程ID */
+        </if>
+
+        <if test='taskDesc != null and taskDesc != "" and taskDesc != "null" and taskDesc != "undefined"'>
+            AND TASK_DESC = #{taskDesc} /* 任务name */
+        </if>
+
+        <if test='cron != null and cron != "" and cron != "null" and cron != "undefined"'>
+            AND CRON = #{cron} /* cron表达式 */
+        </if>
+
+        <if test='status != null and status != "" and status != "null" and status != "undefined"'>
+            AND STATUS = #{status} /* 运行状态Y正在运行N未运行 */
+        </if>
+
+        <if test='deleteFlag != null and deleteFlag != "" and deleteFlag != "null" and deleteFlag != "undefined"'>
+            AND DELETE_FLAG = #{deleteFlag} /* 是否删除Y已删除N未删除 */
+        </if>
+
+        <if test='apiUrl != null and apiUrl != "" and apiUrl != "null" and apiUrl != "undefined"'>
+            AND API_URL = #{apiUrl} /* 接口地址 */
+        </if>
+
+        <if test='remark != null and remark != "" and remark != "null" and remark != "undefined"'>
+            AND REMARK = #{remark} /* 任务描述 */
+        </if>
+
+
+        <!-- 常用自定义字段 -->
+        <!-- /常用自定义字段 -->
+
+    </select>
+
+
+    <!--
+    **************************************************************************
+    * 12.按条件变更一条数据
+    * 注: 根据Bean实体的主键ID,只对部分字段执行变更操作.
+    **************************************************************************
+    -->
+    <update id="getUpdateBy"
+            parameterType="com.hdf.task.entity.TaskTask">
+
+        UPDATE /* getUpdateBy+@com.hdf.task.mapper.TaskTaskDao.xml */
+        TASK_TASK /* */
+        SET CODE = #{code} /* 将主键当做线程ID */
+        <if test='taskDesc != null and taskDesc != "" and taskDesc != "null" and taskDesc != "undefined"'>
+            ,TASK_DESC = #{taskDesc} /* 任务name */
+        </if>
+        <if test='cron != null and cron != "" and cron != "null" and cron != "undefined"'>
+            ,CRON = #{cron} /* cron表达式 */
+        </if>
+        <if test='status != null and status != "" and status != "null" and status != "undefined"'>
+            ,STATUS = #{status} /* 运行状态Y正在运行N未运行 */
+        </if>
+        <if test='deleteFlag != null and deleteFlag != "" and deleteFlag != "null" and deleteFlag != "undefined"'>
+            ,DELETE_FLAG = #{deleteFlag} /* 是否删除Y已删除N未删除 */
+        </if>
+        <if test='apiUrl != null and apiUrl != "" and apiUrl != "null" and apiUrl != "undefined"'>
+            ,API_URL = #{apiUrl} /* 接口地址 */
+        </if>
+        <if test='remark != null and remark != "" and remark != "null" and remark != "undefined"'>
+            ,REMARK = #{remark} /* 任务描述 */
+        </if>
+        WHERE CODE = #{code} /* 将主键当做线程ID */
+
+    </update>
+
+
+    <!--
+    **************************************************************************
+    * 13.InsertBatch - 批量新增数据
+    * 注: 根据List对象执行批量新增操作.
+    **************************************************************************
+    -->
+    <insert id="getInsertBatch"
+            parameterType="java.util.List">
+
+        INSERT /* getInsertBatch+@com.hdf.task.mapper.TaskTaskDao.xml */
+        INTO TASK_TASK /* */
+        (
+        CODE /* 将主键当做线程ID */
+        ,TASK_DESC /* 任务name */
+        ,CRON /* cron表达式 */
+        ,STATUS /* 运行状态Y正在运行N未运行 */
+        ,DELETE_FLAG /* 是否删除Y已删除N未删除 */
+        ,API_URL /* 接口地址 */
+        ,REMARK /* 任务描述 */
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.code} /* 将主键当做线程ID */
+            ,#{item.taskDesc} /* 任务name */
+            ,#{item.cron} /* cron表达式 */
+            ,#{item.status} /* 运行状态Y正在运行N未运行 */
+            ,#{item.deleteFlag} /* 是否删除Y已删除N未删除 */
+            ,#{item.apiUrl} /* 接口地址 */
+            ,#{item.remark} /* 任务描述 */
+            )
+        </foreach>
+
+    </insert>
+
+
+    <!--
+    **************************************************************************
+    * 14.UpdateBatch - 批量更新数据
+    * 注: 根据List对象执行批量更新操作.
+    **************************************************************************
+    -->
+    <update id="getUpdateBatch"
+            parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" separator=";">
+            UPDATE /* getUpdateBatch+@com.hdf.task.mapper.TaskTaskDao.xml */
+            TASK_TASK /* */
+            SET CODE = #{item.code} /* 将主键当做线程ID */
+            <if test='item.taskDesc != null and item.taskDesc != "" and item.taskDesc != "null" and item.taskDesc != "undefined"'>
+                ,TASK_DESC = #{item.taskDesc} /* 任务name */
+            </if>
+            <if test='item.cron != null and item.cron != "" and item.cron != "null" and item.cron != "undefined"'>
+                ,CRON = #{item.cron} /* cron表达式 */
+            </if>
+            <if test='item.status != null and item.status != "" and item.status != "null" and item.status != "undefined"'>
+                ,STATUS = #{item.status} /* 运行状态Y正在运行N未运行 */
+            </if>
+            <if test='item.deleteFlag != null and item.deleteFlag != "" and item.deleteFlag != "null" and item.deleteFlag != "undefined"'>
+                ,DELETE_FLAG = #{item.deleteFlag} /* 是否删除Y已删除N未删除 */
+            </if>
+            <if test='item.apiUrl != null and item.apiUrl != "" and item.apiUrl != "null" and item.apiUrl != "undefined"'>
+                ,API_URL = #{item.apiUrl} /* 接口地址 */
+            </if>
+            <if test='item.remark != null and item.remark != "" and item.remark != "null" and item.remark != "undefined"'>
+                ,REMARK = #{item.remark} /* 任务描述 */
+            </if>
+            WHERE CODE = #{item.code} /* 将主键当做线程ID */
+        </foreach>
+
+    </update>
+
+
+</mapper>
